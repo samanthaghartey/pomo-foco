@@ -49,8 +49,8 @@ Your app should now be running at `http://localhost:3000/`.
 - **React**: For building the user interface.
 - **Tailwind CSS**: For styling the components.
 - **LocalStorage**: To persist data across sessions.
-- **React Router**: For routing (if applicable).
-- **Node.js**: For backend (if applicable).
+- **React Router**: For routing
+- **Node.js**: For backend
 
 ## Contributing
 
@@ -64,10 +64,10 @@ Please make sure to update tests and documentation as needed.
 
 ## Contact
 If you have any questions, feel free to reach out at:
-- Email:  gharteysamanthas@example.com
+- Email:  gharteysamanthas@gmail.com
 - Twitter: @seaghartey
 
 ## Acknowledgements
-- Thanks to [Tailwind CSS](https://tailwindcss.com) and [DaisyUi](https://daisyui.com)) for the awesome utility-first CSS framework.
+- Thanks to [Tailwind CSS](https://tailwindcss.com) and [DaisyUi](https://daisyui.com) for the awesome utility-first CSS framework.
 - [React](https://reactjs.org) for the amazing JavaScript library.
 
