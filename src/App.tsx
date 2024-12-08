@@ -12,7 +12,7 @@ const App = () => {
   return (
     <TaskListProvider>
 
-    <div   className='bg-blue-700 lg:px-80 py-7  flex items-center flex-col sm:px-0 '>
+    <div   className='bg-blue-700 lg:px-80 py-7  flex items-center flex-col sm:px-4 '>
       <Navbar/>
       <Timer/>
     </div>
