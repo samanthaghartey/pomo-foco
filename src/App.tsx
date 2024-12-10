@@ -5,12 +5,19 @@ import CompletedTaskList from "./components/CompletedTaskList";
 import TextContent from "./components/TextContent";
 
 import TaskListProvider from "./components/TaskListProvider";
-import Practice from "./practice/practice";
+import AddTaskButton from "./components/addTaskButton";
+import React, { FC, useContext } from "react";
+import { TaskListContext } from "./contexts/context";
+import AddTaskDialog from "./custom hooks/useShowDialog";
+import { FaPlusCircle } from "react-icons/fa";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <TaskListProvider>
-      <div className="bg-blue-700 lg:px-80 py-7  flex items-center flex-col sm:px-4 ">
+      <div
+        className="bg-primary
+       lg:px-80 py-7  flex items-center flex-col sm:px-4 "
+      >
         <Navbar />
 
         <Timer />

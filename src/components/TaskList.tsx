@@ -1,48 +1,39 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Task from './Task'
-import { TaskListContext } from '../contexts/context'
-import { TaskType } from '../types/types'
-import { addData } from '../database/db'
+import React, { useContext } from "react";
+import Task from "./Task";
+import { TaskListContext } from "../contexts/context";
+import { v4 as uuidv4 } from "uuid";
+import { FaPlusCircle } from "react-icons/fa";
+import AddTaskDialog from "@/custom hooks/useShowDialog";
 
 const TaskList: React.FC = () => {
-
-  const taskList = useContext(TaskListContext)!.taskList
-  const addTask = useContext(TaskListContext)!.addTask
-
-  const [task,setTask] = useState<TaskType >({name : "Melody", pomos: 3, id: 21})
-
-
-
-
+  const taskList = useContext(TaskListContext)!.taskList.filter(
+    (task) => task.completed == false
+  ); // get only uncompleted tasks
+  const setVisible = useContext(TaskListContext)!.setvisibilityOfDialog;
+  const visibilityOfDialog = useContext(TaskListContext)!.visibilityOfDialog;
 
   return (
     <div>
-       
-    <div className="task-list flex flex-col items-center gap-y-10">
-      <h1 className="text-blue-700 text-xl">Tasks</h1>
+      <button
+        className="text-white  px-5 py-2 bg-primary rounded-md w-full flex items-center justify-center gap-4"
+        onClick={() => setVisible((v) => !v)}
+      >
+        <FaPlusCircle className="text-white" /> Add New
+      </button>
 
-      {
-        taskList.map(
-          (task)  => <Task name= {task.name} pomos = {task.pomos} key={task.id} />
-        )
-      }
-   
+      {visibilityOfDialog && (
+        <AddTaskDialog task={null} visiblityOfTask={null} />
+      )}
 
-    <button
-    onClick={()=> addTask(task)} 
-  className="px-4 py-3 rounded-sm bg-blue-600 w-5/6 text-white mt-4" 
-  style={{ boxShadow: "4px 4px 0 rgba(0, 0, 0, 1)" }}
->
-  Add New
-</button>
+      <div className="task-list flex flex-col items-center gap-y-10">
+        <h1 className="text-blue-700 text-xl">Tasks</h1>
 
-    
+        {taskList.map((task) => (
+          <Task task={task} key={uuidv4()} />
+        ))}
+      </div>
     </div>
+  );
+};
 
-
-
-    </div>
-  )
-}
-
-export default TaskList
+export default TaskList;

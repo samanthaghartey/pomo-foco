@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TaskListContext } from "../contexts/context";
-import { addData, getData, openDatabase } from "../database/db";
+import { addData, deleteData, getData, openDatabase } from "../database/db";
 import { TaskType, TimeType } from "../types/types";
 
 const TaskListProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -12,10 +12,18 @@ const TaskListProvider: React.FC<{ children: React.ReactNode }> = ({
     minutes: 25,
     seconds: 0,
   });
+  const [visibilityOfDialog, setvisibilityOfDialog] = useState<boolean>(false);
 
   const addTask = (task: TaskType) => {
     if (db) {
-      addData(db!, task);
+      addData(db, task);
+      fetchList();
+    }
+  };
+
+  const deleteTask = (id: number | string) => {
+    if (db) {
+      deleteData(db, id);
       fetchList();
     }
   };
@@ -42,6 +50,7 @@ const TaskListProvider: React.FC<{ children: React.ReactNode }> = ({
       .catch((error) => {
         console.log("Error opening database", error);
       });
+    fetchList();
   }, []);
 
   useEffect(() => {
@@ -60,6 +69,9 @@ const TaskListProvider: React.FC<{ children: React.ReactNode }> = ({
         currentTime,
         setCurrentTime,
         resetTime,
+        visibilityOfDialog,
+        setvisibilityOfDialog,
+        deleteTask,
       }}
     >
       {children}
