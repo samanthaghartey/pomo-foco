@@ -52,12 +52,10 @@ const AddTaskDialog: React.FC<DialogProps> = (props) => {
       });
 
   const calculateAllocatedTime = () => {
-    //* Each pomo set has 4*25 minutes working period and 3*5mins break
-    const totalTime =
-      TimeBlock.SHORTBREAK * 3 * pomoNumber +
-      TimeBlock.POMODORO * 4 * pomoNumber +
-      TimeBlock.LONGBREAK * 1 * pomoNumber;
-    const minutes = totalTime % 60;
+    //* Each pomo set has 25 minutes working period
+    const totalTime = TimeBlock.POMODORO * pomoNumber;
+
+    const minutes = totalTime > 60 ? totalTime % 60 : totalTime;
     const hours = (totalTime - minutes) / 60;
 
     setTimeAllocated({ minutes: minutes, hours: hours });
@@ -75,6 +73,7 @@ TODO: Check for empty name field
       minutes: timeAllocated.minutes || 0,
       id: task ? task.id : uuidv4(),
       completed: false,
+      active: task ? task.active : false,
     };
 
     addTask(newTask);

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { TaskListContext } from "../contexts/context";
 import { addData, deleteData, getData, openDatabase } from "../database/db";
-import { TaskType, TimeType } from "../types/types";
+import { TaskType, TimeBlock, TimeType } from "../types/types";
+import { Session } from "inspector/promises";
 
 const TaskListProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -14,6 +15,25 @@ const TaskListProvider: React.FC<{ children: React.ReactNode }> = ({
   });
   const [visibilityOfDialog, setvisibilityOfDialog] = useState<boolean>(false);
 
+  const [activeTask, setactiveTask] = useState<TaskType | undefined>(undefined);
+
+  let Sessions = {
+    POMODORO: { name: "POMODORO", minutes: TimeBlock.POMODORO, active: true },
+    SHORTBREAK: {
+      name: "SHORTBREAK",
+      minutes: TimeBlock.SHORTBREAK,
+      active: false,
+    },
+    LONGBREAK: {
+      name: "LONGBREAK",
+      minutes: TimeBlock.LONGBREAK,
+      active: false,
+    },
+  };
+
+  const [sessions, setSessions] = useState(Sessions);
+
+  //* FUNCTIONS
   const addTask = (task: TaskType) => {
     if (db) {
       addData(db, task);
@@ -37,6 +57,7 @@ const TaskListProvider: React.FC<{ children: React.ReactNode }> = ({
       getData(db)
         .then((taskList) => {
           setTaskList(taskList);
+          setactiveTask(taskList.find((task) => task.active == true));
         })
         .catch((e) => console.error("Error :(", e));
     }
@@ -55,7 +76,10 @@ const TaskListProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     if (db) {
-      fetchList(); // Fetch data when the DB is successfully opened and set
+      fetchList();
+      setactiveTask(taskList.find((task) => task.active == true));
+
+      // Fetch data when the DB is successfully opened and set
     }
   }, [db]); // Trigger fetch when the db state changes
 
@@ -72,6 +96,10 @@ const TaskListProvider: React.FC<{ children: React.ReactNode }> = ({
         visibilityOfDialog,
         setvisibilityOfDialog,
         deleteTask,
+        activeTask,
+        sessions,
+        setSessions,
+        setactiveTask,
       }}
     >
       {children}

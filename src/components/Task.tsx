@@ -11,20 +11,35 @@ type TaskProp = {
 const Task: React.FC<TaskProp> = ({ task }) => {
   const { name, note, hours, minutes } = task;
 
+  const taskList = useContext(TaskListContext)!.taskList.filter(
+    (task) => task.completed == false
+  );
+
   const [visible, setVisible] = useState(true);
   const addTask = useContext(TaskListContext)!.addTask;
 
+  const setTaskAsActive = (task: TaskType) => {
+    taskList.map((item) => {
+      item.id == task.id
+        ? addTask({ ...item, active: true })
+        : addTask({ ...item, active: false });
+    });
+  };
+
   return visible ? (
     <div
-      className={`rounded-lg bg-primary text-white px-10 py-5 flex justify-between w-4/6  sm:px-4 sm:w-5/6 `}
+      onDoubleClick={() => setTaskAsActive(task)}
+      className={`rounded-lg  ${
+        task.active ? "bg-green-500" : "bg-primary"
+      } text-white px-10 py-5 flex justify-between w-5/6  sm:px-4 sm:w-5/6 `}
     >
-      <div className="text w-1/2 sm:w-full">
+      <div className="text  sm:w-full">
         <input
           type="checkbox"
           className="checkbox"
           checked={task.completed}
           onChange={() => {
-            addTask({ ...task, completed: !task.completed });
+            addTask({ ...task, completed: !task.completed, active: false });
           }}
         />
         <h1 className="task-name text-xl font-semibold">{name}</h1>

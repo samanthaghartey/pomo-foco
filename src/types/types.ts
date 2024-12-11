@@ -6,6 +6,7 @@ export type TaskType = {
   hours: number;
   minutes: number;
   completed: boolean;
+  active: boolean;
 };
 
 export type TimeType = {
@@ -24,15 +25,26 @@ export type TaskListContextType = {
   resetTime: (time: TimeType) => void;
   visibilityOfDialog: boolean;
   setvisibilityOfDialog: React.Dispatch<React.SetStateAction<boolean>>;
+  activeTask: TaskType | undefined;
+  sessions: Session;
+  setSessions: React.Dispatch<React.SetStateAction<Session>>;
+  setactiveTask: React.Dispatch<React.SetStateAction<TaskType | undefined>>;
 };
 
-/* export type TimeBlock = {
-  minutes : number
-  seconds : number
-} */
-
 export enum TimeBlock {
-  POMODORO = 25,
-  SHORTBREAK = 5,
-  LONGBREAK = 20,
+  POMODORO = 1,
+  SHORTBREAK = 1,
+  LONGBREAK = 2,
 }
+
+export type Session = {
+  POMODORO: SessionBlock;
+  SHORTBREAK: SessionBlock;
+  LONGBREAK: SessionBlock;
+};
+
+export type SessionBlock = {
+  name: string;
+  minutes: number;
+  active: boolean;
+};

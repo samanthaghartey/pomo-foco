@@ -128,7 +128,7 @@ export const openDatabase = (): Promise<IDBDatabase> => {
 
     request.onsuccess = (e) => {
       const db = (e.target as IDBOpenDBRequest).result;
-      console.log("Database opened successfully.");
+
       resolve(db);
     };
 
@@ -150,7 +150,6 @@ export const addData = (db: IDBDatabase, task: TaskType): Promise<void> => {
     const request = store.put(task);
 
     request.onsuccess = () => {
-      console.log("added");
       resolve();
     };
     request.onerror = (e) => {
