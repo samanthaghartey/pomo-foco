@@ -9,13 +9,17 @@ const CompletedTaskList = () => {
   );
 
   return (
-    <div className="bg-blue-700 px-4 py-4 mt-10  items-center w-5/6 rounded-md ">
-      <h1 className="mb-4">Completed</h1>
+    <div className="bg-primary px-4 py-4 mt-10  items-center w-5/6 rounded-md ">
+      <h1 className="mb-4 font-semibold text-white">Completed Tasks</h1>
 
-      <div className="list flex  justify-center items-center flex-col gap-8">
-        {completedtaskList.map((task) => (
-          <CompletedTask task={task} key={task.id} />
-        ))}
+      <div className="list flex transition-all   justify-center items-center flex-col gap-8">
+        {completedtaskList.length == 0 ? (
+          <div className="text-gray-200">No tasks completed</div>
+        ) : (
+          completedtaskList.map((task) => (
+            <CompletedTask task={task} key={task.id} />
+          ))
+        )}
       </div>
     </div>
   );

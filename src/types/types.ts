@@ -7,6 +7,7 @@ export type TaskType = {
   minutes: number;
   completed: boolean;
   active: boolean;
+  pomosCompleted: number;
 };
 
 export type TimeType = {
@@ -32,9 +33,9 @@ export type TaskListContextType = {
 };
 
 export enum TimeBlock {
-  POMODORO = 1,
-  SHORTBREAK = 1,
-  LONGBREAK = 2,
+  POMODORO = 25,
+  SHORTBREAK = 5,
+  LONGBREAK = 20,
 }
 
 export type Session = {

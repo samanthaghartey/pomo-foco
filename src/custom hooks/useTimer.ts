@@ -3,6 +3,7 @@ import { TaskListContext } from "../contexts/context";
 import { useShowNotification } from "./useShowNotification";
 import { SessionBlock, TimeType } from "../types/types";
 import { Session } from "inspector/promises";
+import { log } from "console";
 
 export default function useTimer() {
   const {
@@ -12,13 +13,18 @@ export default function useTimer() {
     setSessions,
     setactiveTask,
     addTask,
+    currentTime,
+    setCurrentTime,
   } = useContext(TaskListContext)!;
-  const [myActiveTask, setmyActiveTask] = useState(activeTask);
   const [numberofpomos, setnumberofpomos] = useState(
-    myActiveTask ? myActiveTask.pomos : 3
+    activeTask ? activeTask.pomos : 40
   );
-  const [pomosRan, setpomosRan] = useState(0);
-  const [pomosCompleted, setpomosCompleted] = useState(0); //to check when to tak long break
+  const [pomosCompleted, setpomosCompleted] = useState(
+    activeTask ? activeTask.pomosCompleted : 0
+  );
+
+  //*to check when to take long break
+  const [takeBreak, setTaakeBreak] = useState(0);
 
   const [activeSession, setActiveSession] = useState<SessionBlock>(
     Object.values(sessions).find((session) => session.active) ??
@@ -30,16 +36,11 @@ export default function useTimer() {
     activeSession.minutes
   );
 
-  const setCurrentTime = useContext(TaskListContext)!.setCurrentTime;
-
-  //* get current time.
-  const currentTime = useContext(TaskListContext)!.currentTime;
-
   //*boolean to mange timer's runtime
   const [isRunning, setisRunning] = useState<boolean>(false);
+  const [isRestarted, setisRestarted] = useState<boolean>(false);
 
   //* REDUCER
-
   const reducer = (state: TimeType, action: any) => {
     setisRunning(false);
     const targetSession = Object.values(sessions).find(
@@ -54,22 +55,18 @@ export default function useTimer() {
 
     return state;
   };
-
-  // Dispatch action with session name
-
   const [state, dispatch] = useReducer(reducer, currentTime);
-  let interval = useRef<number | undefined>(undefined);
 
+  let interval = useRef<number | undefined>(undefined);
   useEffect(() => {
     Object.entries(sessions).forEach(([key, value]) => {
       if (value.active) {
         setcountdownMinutes(value.minutes);
         setActiveSession(value);
       }
-      setmyActiveTask(activeTask);
     });
 
-    if (isRunning && pomosCompleted < numberofpomos) {
+    if (isRunning == true) {
       interval.current = setInterval(() => {
         setCurrentTime((time) => ({ ...time, seconds: time.seconds + 1 }));
       }, 50);
@@ -96,8 +93,16 @@ export default function useTimer() {
       setisRunning(false);
 
       if (activeSession.name == "POMODORO") {
-        setpomosCompleted((p) => p + 1);
-        setpomosRan((n) => n + 1);
+        if (activeTask) {
+          setpomosCompleted((n) => n + 1);
+          addTask({
+            ...activeTask,
+
+            pomosCompleted: activeTask.pomosCompleted + 1,
+          });
+        }
+
+        setTaakeBreak((n) => n + 1);
       }
 
       setCurrentTime((time) => ({
@@ -107,27 +112,36 @@ export default function useTimer() {
       }));
 
       //* check to see which section to move to
-      if (activeSession.name == "POMODORO") {
-        const updatedSessions = {
-          ...sessions,
-          POMODORO: { ...sessions.POMODORO, active: false },
-          SHORTBREAK: { ...sessions.SHORTBREAK, active: true },
-          LONGBREAK: { ...sessions.LONGBREAK, active: false },
-        };
-        setSessions(updatedSessions);
-      } else if (
-        activeSession.name == "SHORTBREAK" ||
-        activeSession.name == "LONGBREAK"
-      ) {
-        const updatedSessions = {
-          ...sessions,
-          POMODORO: { ...sessions.POMODORO, active: true },
-          SHORTBREAK: { ...sessions.SHORTBREAK, active: false },
-          LONGBREAK: { ...sessions.LONGBREAK, active: false },
-        };
-        setSessions(updatedSessions);
+      if (!isRestarted) {
+        if (activeSession.name == "POMODORO") {
+          const updatedSessions = {
+            ...sessions,
+            POMODORO: { ...sessions.POMODORO, active: false },
+            SHORTBREAK: { ...sessions.SHORTBREAK, active: true },
+            LONGBREAK: { ...sessions.LONGBREAK, active: false },
+          };
+          setSessions(updatedSessions);
+        } else if (
+          activeSession.name == "SHORTBREAK" ||
+          activeSession.name == "LONGBREAK"
+        ) {
+          const updatedSessions = {
+            ...sessions,
+            POMODORO: { ...sessions.POMODORO, active: true },
+            SHORTBREAK: { ...sessions.SHORTBREAK, active: false },
+            LONGBREAK: { ...sessions.LONGBREAK, active: false },
+          };
+          setSessions(updatedSessions);
+        }
       }
     }
+  };
+
+  const resetTimer = () => {
+    setCurrentTime({ minutes: activeSession.minutes, seconds: 0 });
+    clearInterval(interval.current);
+    setisRunning(false);
+    setisRestarted(true);
   };
 
   useEffect(() => {
@@ -146,18 +160,24 @@ export default function useTimer() {
   }, [sessions]);
 
   useEffect(() => {
-    console.log("num of pomos", numberofpomos);
+    console.log(activeTask);
 
-    if (pomosRan >= numberofpomos) {
+    //* check if the active task has completed its allocated pomos
+    if (pomosCompleted >= numberofpomos) {
       useShowNotification();
       if (activeTask) {
-        addTask({ ...activeTask, completed: true, active: false });
-        console.log(activeTask);
+        addTask({
+          ...activeTask,
+          completed: true,
+          active: false,
+          pomosCompleted: 0,
+        });
+        setpomosCompleted(activeTask.pomosCompleted);
       }
     }
 
     //* move to long break after log breaks
-    if (pomosCompleted >= 4) {
+    if (takeBreak % 4 == 0) {
       const updatedSessions = {
         ...sessions,
         POMODORO: { ...sessions.POMODORO, active: false },
@@ -165,9 +185,23 @@ export default function useTimer() {
         LONGBREAK: { ...sessions.LONGBREAK, active: true },
       };
       setSessions(updatedSessions);
-      setpomosCompleted(0);
     }
-  }, [pomosCompleted, pomosRan]);
+  }, [pomosCompleted, takeBreak]);
 
-  return { currentTime, isRunning, setisRunning, dispatch };
+  useEffect(() => {
+    //* get the pomos of the actice task when it chnages
+    if (activeTask) {
+      setnumberofpomos(activeTask.pomos);
+      setpomosCompleted(activeTask.pomosCompleted);
+    }
+  }, [activeTask]);
+
+  return {
+    currentTime,
+    isRunning,
+    setisRunning,
+    dispatch,
+    resetTimer,
+    setisRestarted,
+  };
 }

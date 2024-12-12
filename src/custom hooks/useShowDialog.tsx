@@ -74,6 +74,7 @@ TODO: Check for empty name field
       id: task ? task.id : uuidv4(),
       completed: false,
       active: task ? task.active : false,
+      pomosCompleted: task ? task.pomosCompleted : 0,
     };
 
     addTask(newTask);
@@ -87,7 +88,7 @@ TODO: Check for empty name field
 
   return (
     <div
-      className={`w-5/6 mb-5 visibility: ${
+      className={` mb-5 visibility: ${
         visibilityOfDialog || !visiblityOfTask ? "visible" : "hidden"
       }  `}
     >
@@ -150,7 +151,13 @@ TODO: Check for empty name field
                     <Label htmlFor="pomos">Total Time </Label>
                     <div
                       className="time 
-          flex h-9 w-full text-sm rounded-md border border-input bg-transparent px-3 py-1 shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm
+          flex h-9 w-full text-sm rounded-md border border-input bg-transparent 
+          px-3 py-1 shadow-sm transition-colors file:border-0 file:bg-transparent 
+          file:text-sm file:font-medium file:text-foreground 
+          placeholder:text-muted-foreground focus-visible:outline-none 
+          focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed 
+          disabled:opacity-50 md:text-sm
+
          
         "
                     >

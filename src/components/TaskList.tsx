@@ -19,27 +19,31 @@ const TaskList: React.FC = () => {
   const visibilityOfDialog = useContext(TaskListContext)!.visibilityOfDialog;
 
   return (
-    <div>
+    <div className="transition-all  flex flex-col justify-center items-center gap-y-10 w-5/6 o">
+      <div className="task-list flex flex-col justify-center items-center gap-y-10 w-full">
+        <h1 className="text-blue-700 text-xl">Tasks</h1>
+
+        {taskList.length == 0 ? (
+          <div className=" rounded-md text-center p-10 bg-sky-100 text-gray-400 w-full">
+            {" "}
+            No tasks yet
+          </div>
+        ) : (
+          taskList.map((task) => <Task task={task} key={uuidv4()} />)
+        )}
+      </div>
+
       <button
-        className="text-white  px-5 py-2 bg-primary rounded-md w-full flex items-center justify-center gap-4"
+        className="text-white  px-5 py-2 bg-primary rounded-md flex w-full items-center justify-center gap-4"
         onClick={() => {
           setVisible((v) => !v);
         }}
       >
         <FaPlusCircle className="text-white" /> Add New
       </button>
-
       {visibilityOfDialog && (
         <AddTaskDialog task={null} visiblityOfTask={null} />
       )}
-
-      <div className="task-list flex flex-col items-center gap-y-10">
-        <h1 className="text-blue-700 text-xl">Tasks</h1>
-
-        {taskList.map((task) => (
-          <Task task={task} key={uuidv4()} />
-        ))}
-      </div>
     </div>
   );
 };

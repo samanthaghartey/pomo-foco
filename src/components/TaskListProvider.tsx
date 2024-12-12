@@ -20,12 +20,12 @@ const TaskListProvider: React.FC<{ children: React.ReactNode }> = ({
   let Sessions = {
     POMODORO: { name: "POMODORO", minutes: TimeBlock.POMODORO, active: true },
     SHORTBREAK: {
-      name: "SHORTBREAK",
+      name: "SHORT BREAK",
       minutes: TimeBlock.SHORTBREAK,
       active: false,
     },
     LONGBREAK: {
-      name: "LONGBREAK",
+      name: "LONG BREAK",
       minutes: TimeBlock.LONGBREAK,
       active: false,
     },

@@ -11,9 +11,9 @@ const CompletedTask: React.FC<CompletedTaskListProps> = (props) => {
   const addTask = useContext(TaskListContext)!.addTask;
   return (
     <>
-      <div className="rounded-md bg-white text-blue-700  px-4 py-4  flex justify-between  w-5/6 ">
-        <div className="text ">
-          <h1 className="task-name  ">{task.name}</h1>
+      <div className="  rounded-md bg-white text-gray-600  px-4 py-4  flex justify-between w-full ">
+        <div className="text line-through">
+          <h1 className="task-name ">{task.name}</h1>
         </div>
 
         <div className="check">
