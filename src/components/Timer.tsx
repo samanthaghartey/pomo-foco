@@ -40,7 +40,7 @@ const Timer = () => {
   return (
     <div className="mt-10 w-full  py-8  flex flex-col  card items-center gap-x-4 gap-y-10">
       {/*  // sections */}
-      <div className="sections flex   gap-x-10 justify-between items-center w-5/6 ">
+      <div className="sections flex   lg:gap-x-10 gap-x-2 justify-between items-center ">
         {sections.map((section, index) => {
           return (
             <div

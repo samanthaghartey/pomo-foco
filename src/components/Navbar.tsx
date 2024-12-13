@@ -4,8 +4,9 @@ import { FaHamburger } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
 
 const Navbar = () => {
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(0);
   const [menuListShowing, setMenuListShowing] = useState(false);
+  const [menuList, setmenu] = useState(["Stats", "Settings", "Profile"]);
 
   const showMenu = () => {
     setMenuListShowing((m) => !m);
@@ -17,18 +18,17 @@ const Navbar = () => {
           {" "}
           <div className="logo  text-mybackground"> LOGO </div>
           <div className="hidden md:flex space-x-4">
-            <div className="bg-mybackground text-primary rounded-md z-[1]  px-3 py-1 shadow ">
-              {" "}
-              <a href="">STATS</a>{" "}
-            </div>
-            <div className=" rounded-md z-[1]  px-3 py-1 shadow  text-mybackground">
-              {" "}
-              <a href="">SETTINGS</a>{" "}
-            </div>
-            <div className=" rounded-md z-[1]  px-3 py-1 shadow  text-mybackground">
-              {" "}
-              <a href="">SG</a>{" "}
-            </div>
+            {menuList.map((item, index) => (
+              <div
+                key={index}
+                onClick={() => setActive(index)}
+                className={`cursor-pointer  rounded-md z-[1]  px-3 py-1 shadow text-xs  ${
+                  active == index ? "bg-white text-primary" : "text-white"
+                }`}
+              >
+                <div>{item}</div>
+              </div>
+            ))}
           </div>
           <div className="md:hidden">
             <button id="menu-btn" className="focus:outline-none">
@@ -49,18 +49,11 @@ const Navbar = () => {
           menuListShowing ? "" : "hidden"
         }`}
       >
-        <a className="block px-4 py-2 hover:bg-mybackground hover:text-primary hover:border-2 hover:border-primary">
-          Home
-        </a>
-        <a className="block px-4 py-2 hover:bg-mybackground hover:text-primary hover:border-2 hover:border-primary">
-          About
-        </a>
-        <a className="block px-4 py-2 hover:bg-mybackground hover:text-primary hover:border-2 hover:border-primary">
-          Services
-        </a>
-        <a className="block px-4 py-2 hover:bg-mybackground hover:text-primary hover:border-2 hover:border-primary rounded-b-lg">
-          Contact
-        </a>
+        {menuList.map((item) => (
+          <div className="block px-4 py-2 hover:bg-mybackground hover:text-primary hover:border-2 hover:border-primary">
+            {item}
+          </div>
+        ))}
       </div>
     </nav>
   );
