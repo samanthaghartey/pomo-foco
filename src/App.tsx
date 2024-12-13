@@ -14,7 +14,7 @@ import { FaPlusCircle } from "react-icons/fa";
 const App: React.FC = () => {
   return (
     <TaskListProvider>
-      <div className="bg-primary lg:px-96 md:px-16 sm:px-4 py-7 flex items-center flex-col ">
+      <div className="bg-mybackground lg:px-96 md:px-16 sm:px-4 py-7 flex items-center flex-col ">
         <Navbar />
 
         <Timer />

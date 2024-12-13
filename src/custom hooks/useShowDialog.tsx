@@ -93,7 +93,7 @@ TODO: Check for empty name field
       }  `}
     >
       <div className={` px-2 `}>
-        <Card className=" bg-tryColor w-full mb-4">
+        <Card className=" w-full mb-4 ">
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle> {task ? "Edit" : "Add New"} Task</CardTitle>
             {task && (
@@ -120,9 +120,10 @@ TODO: Check for empty name field
                   />
                 </div>
                 <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="name">Notes</Label>
+                  <Label htmlFor="notes">Notes</Label>
                   <Input
-                    id="name"
+                    className="resize-y"
+                    id="notes"
                     placeholder="Any notes...."
                     value={taskNote}
                     onChange={(e) => {

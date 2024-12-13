@@ -13,16 +13,22 @@ module.exports = {
         primary: {
           DEFAULT: "var(--primary)",
           foreground: "hsl(var(--primary-foreground))",
+          light: "var(--primarylight)",
         },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+        mybackground: {
+          DEFAULT: "var(--mybackground)",
+        },
+        myaccent: {
+          DEFAULT: "var(--myaccent)",
+        },
+        mysecondary: {
+          DEFAULT: "var(--mysecondary)",
+          foreground: "hsl(var(--mysecondary))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
         },
-        background: "hsl(var(--background))",
+        background: "hsl(var(--mybackground))",
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",
@@ -58,26 +64,7 @@ module.exports = {
       },
     },
   },
-  daisyui: {
-    themes: [
-      "light",
-      "dark",
-      "cupcake",
-      {
-        mytheme: {
-          primary: "#ff00ee",
-          secondary: "#0000ff",
-          accent: "#0000ff",
-          neutral: "#05190a",
-          "base-100": "#252530",
-          info: "#007cb6",
-          success: "#3ba22e",
-          warning: "#9b5800",
-          error: "#d5004c",
-        },
-      },
-    ],
-  },
+
   plugins: [
     require("@tailwindcss/typography"),
     require("daisyui"),

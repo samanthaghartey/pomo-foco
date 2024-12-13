@@ -40,15 +40,15 @@ const Task: React.FC<TaskProp> = ({ task }) => {
   return visible ? (
     <div
       onDoubleClick={() => setTaskAsActive(task)}
-      className={`rounded-lg transition-color duration-500   ${
-        task.active ? "bg-green-500" : "bg-primary"
-      } text-white px-4 py-5 flex justify-between w-full h-fit`}
+      className={`rounded-lg    ${
+        task.active ? "bg-green-500" : "bg-myaccent"
+      } text-white px-4 py-5 flex flex-wrap   w-full justify-between items-center  `}
     >
-      <div className="text flex-wrap flex flex-col ">
-        <div className="text-and-check flex-row flex gap-2 items-center">
+      <div className="  flex flex-col w-3/4 ">
+        <div className="text-and-check flex-row flex gap-2 items-center ">
           <input
             type="checkbox"
-            className="checkbox checkbox-xs"
+            className="checkbox checkbox-xs border-solid  border-mybackground"
             checked={task.completed}
             onChange={() => {
               addTask({ ...task, completed: !task.completed, active: false });
@@ -56,13 +56,13 @@ const Task: React.FC<TaskProp> = ({ task }) => {
           />
           <h1 className="task-name text-xl font-semibold">{name}</h1>
         </div>
-        <div className="flex  flex-wrap w-1/2">
-          <p className=" text-xs  break-words  ">{note}</p>
-        </div>{" "}
+
+        <div className=" text-xs  break-words w-3/4  ">{note}</div>
       </div>
 
-      <div className="time-left flex-y-1 flex flex-col items-end ">
+      <div className="time-left flex flex-col items-end  text-mysecondary">
         <FaEllipsis
+          className=" text-2xl"
           onClick={() => {
             setVisible((v) => !v);
           }}
@@ -72,14 +72,14 @@ const Task: React.FC<TaskProp> = ({ task }) => {
             hoursLeft >= 1 ? hoursLeft + "hour" : ""
           } ${minutesLeft}mins left`}
         </div>
-        <div className="tomatoes flex gap-x-4">
-          <div className="tomato-complete w-6 h-6 bg-blue-500 rounded-full">
+        <div className="tomatoes flex gap-x-4 mt-1">
+          <div className="tomato-complete w-6 h-6 bg-mybackground rounded-full">
             {" "}
           </div>
-          <div className="tomato-complete w-6 h-6 bg-blue-500 rounded-full">
+          <div className="tomato-complete w-6 h-6 bg-mybackground rounded-full">
             {" "}
           </div>
-          <div className="tomato-complete w-6 h-6 bg-blue-500 rounded-full">
+          <div className="tomato-complete w-6 h-6 bg-mybackground rounded-full">
             {" "}
           </div>
         </div>

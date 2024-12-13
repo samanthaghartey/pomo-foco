@@ -5,6 +5,7 @@ import { TaskListContext } from "@/contexts/context";
 import { Session, SessionBlock } from "@/types/types";
 import { FaPause } from "react-icons/fa6";
 import { FcRedo } from "react-icons/fc";
+import { FaRedo } from "react-icons/fa";
 
 const Timer = () => {
   const sessions = useContext(TaskListContext)!.sessions;
@@ -48,10 +49,8 @@ const Timer = () => {
                 handleClick(section);
                 dispatch({ type: section.name });
               }}
-              className={` px-2 lg:px-5 py-2 text-nowrap w-fit border-2 cursor-pointer  rounded-md  border-sky-50  ${
-                section.active
-                  ? "bg-white border-white text-primary"
-                  : "text-white "
+              className={` px-2 lg:px-5 py-2 text-primary text-nowrap w-fit border-2 cursor-pointer  rounded-md  border-primary  ${
+                section.active ? "bg-white border-primary " : " "
               } 
               `}
             >
@@ -66,7 +65,7 @@ const Timer = () => {
           {/* actual timer */}
 
           {/* //minutes */}
-          <div className="flex flex-col  bg-secondary rounded-box text-neutral-content  p-16">
+          <div className="flex flex-col  bg-primary  rounded-box text-white   p-16">
             <span className="countdown text-5xl">
               <span
                 style={
@@ -80,7 +79,7 @@ const Timer = () => {
           </div>
 
           {/* //secs */}
-          <div className="flex flex-col  bg-secondary rounded-box text-neutral-content  p-16">
+          <div className="flex flex-col  bg-primary rounded-box text-white  p-16">
             <span className=" text-5xl">
               {/*  <span
                 style={
@@ -108,8 +107,11 @@ const Timer = () => {
           {isRunning ? "PAUSE" : "START"}
         </button>
 
-        <button className="px-1 py-1 ml-auto place-items-end border-2 shadow  rounded-md text-3xl ">
-          <FcRedo className="text-black" onClick={() => resetTimer()} />
+        <button className=" ">
+          <FaRedo
+            className="text-primary px-2 py-1 ml-auto place-items-end border-2   rounded-md text-4xl"
+            onClick={() => resetTimer()}
+          />
         </button>
       </div>
     </div>

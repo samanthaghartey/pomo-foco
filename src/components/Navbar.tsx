@@ -1,52 +1,66 @@
-import React from "react";
+import { truncate } from "node:fs";
+import React, { useState } from "react";
+import { FaHamburger } from "react-icons/fa";
+import { FaBars } from "react-icons/fa6";
 
 const Navbar = () => {
+  const [active, setActive] = useState(true);
+  const [menuListShowing, setMenuListShowing] = useState(false);
+
+  const showMenu = () => {
+    setMenuListShowing((m) => !m);
+  };
   return (
-    <nav className="bg-white text-primary min-w-96 rounded-md lg:w-full ">
+    <nav className="bg-primary text-primary min-w-96 rounded-md lg:w-full ">
       <div className="px-4  lg:px-8 w-full">
         <div className="flex justify-between items-center h-16">
           {" "}
-          <div className="logo  text-blue-700"> LOGO </div>
+          <div className="logo  text-mybackground"> LOGO </div>
           <div className="hidden md:flex space-x-4">
-            <div className="bg-blue-700 rounded-md z-[1]  px-3 py-1 shadow ">
+            <div className="bg-mybackground text-primary rounded-md z-[1]  px-3 py-1 shadow ">
               {" "}
               <a href="">STATS</a>{" "}
             </div>
-            <div className=" rounded-md z-[1]  px-3 py-1 shadow  text-blue-700">
+            <div className=" rounded-md z-[1]  px-3 py-1 shadow  text-mybackground">
               {" "}
               <a href="">SETTINGS</a>{" "}
             </div>
-            <div className=" rounded-md z-[1]  px-3 py-1 shadow  text-blue-700">
+            <div className=" rounded-md z-[1]  px-3 py-1 shadow  text-mybackground">
               {" "}
               <a href="">SG</a>{" "}
             </div>
           </div>
           <div className="md:hidden">
             <button id="menu-btn" className="focus:outline-none">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
+              <FaBars
+                className="text-mybackground"
+                onClick={() => {
+                  showMenu();
+                }}
+              />
             </button>
           </div>
         </div>
       </div>
 
-      <div id="mobile-menu" className="md:hidden hidden">
-        <a className="block px-4 py-2 hover:bg-gray-700">Home</a>
-        <a className="block px-4 py-2 hover:bg-gray-700">About</a>
-        <a className="block px-4 py-2 hover:bg-gray-700">Services</a>
-        <a className="block px-4 py-2 hover:bg-gray-700">Contact</a>
+      <div
+        id="mobile-menu"
+        className={`md:hidden text-mybackground ${
+          menuListShowing ? "" : "hidden"
+        }`}
+      >
+        <a className="block px-4 py-2 hover:bg-mybackground hover:text-primary hover:border-2 hover:border-primary">
+          Home
+        </a>
+        <a className="block px-4 py-2 hover:bg-mybackground hover:text-primary hover:border-2 hover:border-primary">
+          About
+        </a>
+        <a className="block px-4 py-2 hover:bg-mybackground hover:text-primary hover:border-2 hover:border-primary">
+          Services
+        </a>
+        <a className="block px-4 py-2 hover:bg-mybackground hover:text-primary hover:border-2 hover:border-primary rounded-b-lg">
+          Contact
+        </a>
       </div>
     </nav>
   );
