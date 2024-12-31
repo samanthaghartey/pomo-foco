@@ -12,7 +12,7 @@ const Navbar = () => {
     setMenuListShowing((m) => !m);
   };
   return (
-    <nav className="bg-primary text-primary min-w-96 rounded-md lg:w-full ">
+    <nav className="bg-primary text-primary min-w-80 rounded-md w-11/12 ">
       <div className="px-4  lg:px-8 w-full">
         <div className="flex justify-between items-center h-16">
           {" "}

@@ -11,10 +11,11 @@ module.exports = {
           dark: "#009eeb",
         },
         primary: {
-          DEFAULT: "var(--primary)",
+          DEFAULT: "var(--primary, #fbace2)",
           foreground: "hsl(var(--primary-foreground))",
           light: "var(--primarylight)",
         },
+
         mybackground: {
           DEFAULT: "var(--mybackground)",
         },

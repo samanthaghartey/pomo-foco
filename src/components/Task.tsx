@@ -41,9 +41,14 @@ const Task: React.FC<TaskProp> = ({ task }) => {
     <div
       onDoubleClick={() => setTaskAsActive(task)}
       className={`rounded-lg    ${
-        task.active ? "bg-green-500" : "bg-myaccent"
+        task.active ? "bg-customBlue-light " : "bg-myaccent"
       } text-white px-4 py-5 flex flex-wrap   w-full justify-between items-center  `}
     >
+      {task.active && (
+        <div className="flex justify-center  w-full">
+          <h1 className="font-semibold text-lg">Current Task</h1>
+        </div>
+      )}
       <div className="  flex flex-col w-3/4 ">
         <div className="text-and-check flex-row flex gap-2 items-center ">
           <input
@@ -72,17 +77,15 @@ const Task: React.FC<TaskProp> = ({ task }) => {
             hoursLeft >= 1 ? hoursLeft + "hour" : ""
           } ${minutesLeft}mins left`}
         </div>
-        <div className="tomatoes flex gap-x-4 mt-1">
+        {/*  <div className="tomatoes flex gap-x-4 mt-1">
           <div className="tomato-complete w-6 h-6 bg-mybackground rounded-full">
             {" "}
           </div>
           <div className="tomato-complete w-6 h-6 bg-mybackground rounded-full">
             {" "}
           </div>
-          <div className="tomato-complete w-6 h-6 bg-mybackground rounded-full">
-            {" "}
-          </div>
-        </div>
+          
+        </div> */}
       </div>
     </div>
   ) : (

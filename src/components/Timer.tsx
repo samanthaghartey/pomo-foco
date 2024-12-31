@@ -38,9 +38,9 @@ const Timer = () => {
   };
 
   return (
-    <div className="mt-10 w-full  py-8  flex flex-col  card items-center gap-x-4 gap-y-10">
+    <div className="mt-10 w-full  py-8  flex flex-col  card items-center gap-x-1 gap-y-10">
       {/*  // sections */}
-      <div className="sections flex   lg:gap-x-10 gap-x-2 justify-between items-center ">
+      <div className="sections flex   lg:gap-x-10 gap-x-1 justify-between items-center ">
         {sections.map((section, index) => {
           return (
             <div
@@ -65,7 +65,7 @@ const Timer = () => {
           {/* actual timer */}
 
           {/* //minutes */}
-          <div className="flex flex-col  bg-primary  rounded-box text-white   p-16">
+          <div className="flex flex-col  bg-primary  rounded-box text-white   p-10">
             <span className="countdown text-5xl">
               <span
                 style={
@@ -79,18 +79,17 @@ const Timer = () => {
           </div>
 
           {/* //secs */}
-          <div className="flex flex-col  bg-primary rounded-box text-white  p-16">
-            <span className=" text-5xl">
-              {/*  <span
+          <div className="flex flex-col  bg-primary  rounded-box text-white   p-10">
+            <span className="countdown text-5xl">
+              <span
                 style={
                   {
                     "--value": currentTimefromuseTimer.seconds.toString(),
                   } as React.CSSProperties
                 }
-              ></span> */}
-              <span>{currentTimefromuseTimer.seconds}</span>
+              ></span>
             </span>
-            secs
+            seconds
           </div>
         </div>
       </div>

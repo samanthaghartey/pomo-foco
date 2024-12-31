@@ -131,7 +131,7 @@ TODO: Check for empty name field
                     }}
                   />
                 </div>
-                <div className="flex flex-row justify-between items-center">
+                <div className="flex flex-row justify-between items-center ">
                   <div className="number-of-pomos  w-fit">
                     <Label className="" htmlFor="pomos">
                       No. pomo blocks
@@ -148,21 +148,21 @@ TODO: Check for empty name field
                     />
                   </div>
 
-                  <div className=" flex flex-col ">
+                  <div className=" flex flex-col  w-1/2">
                     <Label htmlFor="pomos">Total Time </Label>
                     <div
                       className="time 
-          flex h-9 w-full text-sm rounded-md border border-input bg-transparent 
-          px-3 py-1 shadow-sm transition-colors file:border-0 file:bg-transparent 
+          flex items-center h-9 w-full text-sm rounded-md border border-input bg-transparent 
+          px-2 py-1 shadow-sm transition-colors file:border-0 file:bg-transparent 
           file:text-sm file:font-medium file:text-foreground 
           placeholder:text-muted-foreground focus-visible:outline-none 
           focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed 
-          disabled:opacity-50 md:text-sm
+          disabled:opacity-50 
 
          
         "
                     >
-                      {timeAllocated.hours}hr {timeAllocated.minutes}mins
+                      {timeAllocated.hours}hr {timeAllocated.minutes}min
                     </div>
                   </div>
                 </div>

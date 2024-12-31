@@ -10,22 +10,21 @@ import React, { FC, useContext } from "react";
 import { TaskListContext } from "./contexts/context";
 import AddTaskDialog from "./custom hooks/useShowDialog";
 import { FaPlusCircle } from "react-icons/fa";
+import Signup from "./components/Signup";
 
 const App: React.FC = () => {
   return (
     <TaskListProvider>
-      <div className="bg-mybackground lg:px-96 md:px-16 sm:px-4 py-7 flex items-center flex-col ">
+      <div className="bg-mybackground lg:px-96  w-full mx-auto py-7 flex items-center flex-col overflow-x-hidden ">
         <Navbar />
 
         <Timer />
       </div>
 
-      <div className=" min-h-screen lg:px-96 pt-7 flex items-center flex-col bg-white sm:px-11">
+      <div className=" min-h-screen  w-full mx-auto lg:px-96 py-7 flex items-center flex-col bg-white overflow-x-hidden ">
         <TaskList />
 
         <CompletedTaskList />
-
-        <TextContent />
       </div>
     </TaskListProvider>
   );

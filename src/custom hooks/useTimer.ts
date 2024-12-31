@@ -69,7 +69,7 @@ export default function useTimer() {
     if (isRunning == true) {
       interval.current = setInterval(() => {
         setCurrentTime((time) => ({ ...time, seconds: time.seconds + 1 }));
-      }, 50);
+      }, 1000);
     } else {
       clearInterval(interval.current);
     }
