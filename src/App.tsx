@@ -5,8 +5,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import React from "react";
 import HomePage from "./pages/HomePage";
-import Stats from "./pages/Stats";
-import Graph from "./components/Graph";
 
 const App: React.FC = () => {
   return (

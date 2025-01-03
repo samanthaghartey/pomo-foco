@@ -6,7 +6,7 @@ import { TaskType, TimeBlock, TimeType } from "../types/types";
 const TaskListProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [dat, setDay] = useState<Date | null>(null);
+  const [day, setDay] = useState<Date | null>(null);
   const [db, setDb] = useState<IDBDatabase | null>(null);
   const [taskList, setTaskList] = useState<TaskType[]>([]);
   const [currentTime, setCurrentTime] = useState<TimeType>({

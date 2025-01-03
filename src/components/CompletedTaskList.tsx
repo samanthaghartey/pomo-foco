@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import { useContext } from "react";
 import CompletedTask from "./CompletedTask";
 import { TaskListContext } from "@/contexts/context";
-import { TaskType } from "@/types/types";
 
 const CompletedTaskList = () => {
   const completedtaskList = useContext(TaskListContext)!.taskList.filter(
