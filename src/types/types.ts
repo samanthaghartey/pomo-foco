@@ -8,6 +8,7 @@ export type TaskType = {
   completed: boolean;
   active: boolean;
   pomosCompleted: number;
+  date: string;
 };
 
 export type TimeType = {
@@ -16,6 +17,7 @@ export type TimeType = {
 };
 
 export type TaskListContextType = {
+  getTasksForDate: (date: string) => Promise<TaskType[]>;
   taskList: TaskType[];
   setTaskList: React.Dispatch<React.SetStateAction<TaskType[]>>;
   db: IDBDatabase | null;

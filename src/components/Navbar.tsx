@@ -1,12 +1,12 @@
-import { truncate } from "node:fs";
 import React, { useState } from "react";
-import { FaHamburger } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [active, setActive] = useState(0);
   const [menuListShowing, setMenuListShowing] = useState(false);
-  const [menuList, setmenu] = useState(["Stats", "Settings", "Profile"]);
+  /*   const [menuList, setmenu] = useState(["Home", "Stats", "Settings"]);
+   */ const [menuList, setmenu] = useState(["Home"]);
 
   const showMenu = () => {
     setMenuListShowing((m) => !m);
@@ -16,7 +16,10 @@ const Navbar = () => {
       <div className="px-4  lg:px-8 w-full">
         <div className="flex justify-between items-center h-16">
           {" "}
-          <div className="logo  text-mybackground"> LOGO </div>
+          <div className="logo  text-mybackground">
+            {" "}
+            <Link to={`/Home`}>PomoFoco</Link>{" "}
+          </div>
           <div className="hidden md:flex space-x-4">
             {menuList.map((item, index) => (
               <div
@@ -26,7 +29,7 @@ const Navbar = () => {
                   active == index ? "bg-white text-primary" : "text-white"
                 }`}
               >
-                <div>{item}</div>
+                <Link to={`/${item}`}>{item}</Link>
               </div>
             ))}
           </div>
@@ -51,7 +54,7 @@ const Navbar = () => {
       >
         {menuList.map((item) => (
           <div className="block px-4 py-2 hover:bg-mybackground hover:text-primary hover:border-2 hover:border-primary">
-            {item}
+            <Link to={`/${item}`}>{item}</Link>
           </div>
         ))}
       </div>

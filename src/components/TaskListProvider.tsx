@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { TaskListContext } from "../contexts/context";
 import { addData, deleteData, getData, openDatabase } from "../database/db";
 import { TaskType, TimeBlock, TimeType } from "../types/types";
-import { Session } from "inspector/promises";
 
 const TaskListProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const [dat, setDay] = useState<Date | null>(null);
   const [db, setDb] = useState<IDBDatabase | null>(null);
   const [taskList, setTaskList] = useState<TaskType[]>([]);
   const [currentTime, setCurrentTime] = useState<TimeType>({
@@ -63,7 +63,16 @@ const TaskListProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  // Filter tasks by the given date
+  const getTasksForDate = async (date: string): Promise<TaskType[]> => {
+    const db = await openDatabase();
+    const tasks = await getData(db);
+
+    return tasks.filter((task) => task.date === date);
+  };
+
   useEffect(() => {
+    setDay(new Date());
     openDatabase()
       .then((openedDb) => {
         setDb(openedDb);
@@ -100,6 +109,7 @@ const TaskListProvider: React.FC<{ children: React.ReactNode }> = ({
         sessions,
         setSessions,
         setactiveTask,
+        getTasksForDate,
       }}
     >
       {children}

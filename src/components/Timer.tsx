@@ -3,8 +3,7 @@ import useTimer from "../custom hooks/useTimer";
 import { TaskListContext } from "@/contexts/context";
 
 import { Session, SessionBlock } from "@/types/types";
-import { FaPause } from "react-icons/fa6";
-import { FcRedo } from "react-icons/fc";
+
 import { FaRedo } from "react-icons/fa";
 
 const Timer = () => {

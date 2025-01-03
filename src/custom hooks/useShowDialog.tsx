@@ -21,6 +21,7 @@ type DialogProps = {
   task: TaskType | null;
   visiblityOfTask: boolean | null;
 };
+
 const AddTaskDialog: React.FC<DialogProps> = (props) => {
   if (!props) {
     return null; // Handle the case where no props are passed
@@ -66,6 +67,7 @@ TODO: Check for empty name field
   */
   const saveTask = () => {
     const newTask: TaskType = {
+      date: new Date().toISOString().split("T")[0],
       name: taskName,
       pomos: pomoNumber || 0,
       note: taskNote,

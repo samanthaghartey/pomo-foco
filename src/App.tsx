@@ -1,31 +1,27 @@
 import Navbar from "./components/Navbar";
-import Timer from "./components/Timer";
-import TaskList from "./components/TaskList";
-import CompletedTaskList from "./components/CompletedTaskList";
-import TextContent from "./components/TextContent";
 
 import TaskListProvider from "./components/TaskListProvider";
-import AddTaskButton from "./components/addTaskButton";
-import React, { FC, useContext } from "react";
-import { TaskListContext } from "./contexts/context";
-import AddTaskDialog from "./custom hooks/useShowDialog";
-import { FaPlusCircle } from "react-icons/fa";
-import Signup from "./components/Signup";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import React from "react";
+import HomePage from "./pages/HomePage";
+import Stats from "./pages/Stats";
+import Graph from "./components/Graph";
 
 const App: React.FC = () => {
   return (
     <TaskListProvider>
-      <div className="bg-mybackground lg:px-96  w-full mx-auto py-7 flex items-center flex-col overflow-x-hidden ">
-        <Navbar />
+      <Router>
+        <div className="bg-mybackground lg:px-96  w-full mx-auto py-7 flex items-center flex-col overflow-x-hidden ">
+          <Navbar />
+        </div>
 
-        <Timer />
-      </div>
-
-      <div className=" min-h-screen  w-full mx-auto lg:px-96 py-7 flex items-center flex-col bg-white overflow-x-hidden ">
-        <TaskList />
-
-        <CompletedTaskList />
-      </div>
+        <Routes>
+          <Route path="/Home" element={<HomePage />} />
+          {/*   <Route path="/Stats" element={<Graph />} />
+          <Route path="/Settings" element={<Stats />} /> */}
+        </Routes>
+      </Router>
     </TaskListProvider>
   );
 };
