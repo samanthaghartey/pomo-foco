@@ -20,7 +20,7 @@ const Navbar = () => {
             {" "}
             <Link to={`/Home`}>PomoFoco</Link>{" "}
           </div>
-          <div className="hidden md:flex space-x-4">
+          {/*  <div className="hidden md:flex space-x-4">
             {menuList.map((item, index) => (
               <div
                 key={index}
@@ -32,7 +32,7 @@ const Navbar = () => {
                 <Link to={`/${item}`}>{item}</Link>
               </div>
             ))}
-          </div>
+          </div> */}
           <div className="md:hidden">
             <button id="menu-btn" className="focus:outline-none">
               <FaBars
@@ -54,7 +54,7 @@ const Navbar = () => {
       >
         {menuList.map((item) => (
           <div className="block px-4 py-2 hover:bg-mybackground hover:text-primary hover:border-2 hover:border-primary">
-            <Link to={`/${item}`}>{item}</Link>
+            {/* <Link to={`/${item}`}>{item}</Link> */}
           </div>
         ))}
       </div>

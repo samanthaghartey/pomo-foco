@@ -6,7 +6,7 @@ import Timer from "@/components/Timer";
 const HomePage = () => {
   return (
     <>
-      <div className="bg-mybackground  flex items-center flex-col overflow-x-hidden ">
+      <div className="bg-mybackground  lg:px-96   flex items-center flex-col overflow-x-hidden ">
         <Timer />
       </div>
 
