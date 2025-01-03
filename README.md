@@ -48,7 +48,7 @@ Your app should now be running at `http://localhost:3000/`.
 ## Technologies Used
 - **React**: For building the user interface.
 - **Tailwind CSS**: For styling the components.
-- **LocalStorage**: To persist data across sessions.
+- **IndexDB**: To persist data across sessions.
 - **React Router**: For routing
 - **Node.js**: For backend
 
