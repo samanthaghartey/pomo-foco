@@ -1,5 +1,5 @@
 # Pomo-Foco
-
+Public deployment : https://pomo-foco2.vercel.app/
 
 ## Description
 A simple and customizable Pomodoro timer app to help improve productivity through time management techniques. It tracks work sessions and break periods, allowing users to focus on tasks efficiently.
